@@ -1,0 +1,19 @@
+<tr>
+  <td>
+    <%= image_tag line_item.product.image.tiny.url %>
+  </td>
+  <td>
+    <p><strong><%= line_item.product.name %></strong></p>
+    <p><%= line_item.product.description %></p>
+  </td>
+  
+  <td>
+    <%= formatted_price(line_item.product.price) %>
+  </td>
+  <td>
+    <%= line_item.quantity %>
+  </td>
+  <td>
+    <%= formatted_price(line_item.product.price * line_item.quantity) %>
+  </td>
+</tr>
