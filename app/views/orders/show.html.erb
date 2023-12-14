@@ -1,13 +1,32 @@
 <section class="orders-show">
 
   <header class="page-header">
-    <h1>Order #<%= @order.id %></h1>
+    <h1>Order # <%= @order.id %></h1>
   </header>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">Product</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |line_item| %>
+      <%= render 'line_item', line_item: line_item %>
+    <% end %>
+  </tbody>
+  </table>
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <p><strong>Total Amount:</strong> <%= formatted_price(@order.total) %></p>
+    <p><strong>Email:</strong> <%= @order.email %></p>
+    <p><strong>Order Date:</strong> <%= @order.created_at.strftime("%B %d, %Y") %></p>
   </div>
 
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-success' %>
 
 </section>
