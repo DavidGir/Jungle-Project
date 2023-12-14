@@ -30,6 +30,18 @@ main section.categories-show {
         border-radius: 0.25rem;
       }
 
+      .sold-out-overlay {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        font-size: xx-large;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
       a {
         text-decoration: none;
       }
