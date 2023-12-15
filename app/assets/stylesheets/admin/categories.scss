@@ -1,0 +1,60 @@
+.admin-categories-index {
+  margin: 20px;
+}
+
+.admin-categories-index .page-header {
+  margin-bottom: 20px;
+}
+
+.admin-categories-index .well {
+  margin-bottom: 20px;
+}
+
+.admin-categories-index .panel {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+.admin-categories-index table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-categories-index table th,
+.admin-categories-index table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.admin-categories-index table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.admin-categories-index table tbody tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.admin-categories-index .btn-success {
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+.admin-categories-index h4 {
+  font-size: large;
+}
+
+.category-link {
+  color: #333; 
+  text-decoration: none; 
+}
+
+.category-link:hover {
+  color: #555; 
+  text-decoration: underline; 
+}
+
+
