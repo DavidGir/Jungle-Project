@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_14_101108) do
+ActiveRecord::Schema.define(version: 2023_12_15_121328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,13 +60,12 @@ ActiveRecord::Schema.define(version: 2023_12_14_101108) do
     t.string "password_digest"
   end
 
-  create_table "widgets", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name", limit: 255, null: false
+  create_table "widgets", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "widgets", "users", name: "widgets_user_id_fkey"
 end
