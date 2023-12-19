@@ -30,9 +30,14 @@ RSpec.describe Product, type: :model do
     end
 
     #Validation for category
-    
-    # Validation that a product with all valid fields saves successfully
+    it 'does not save without a category' do
+      @product = Product.new(name: "Test Product", price: 100, quantity: 10, category: nil)
+      expect(@product.save).to be false
+      expect(@product.errors.full_messages).to include("Category can't be blank")
+    end
 
+    # Validation that a product with all valid fields saves successfully
+    
 
   end
 end
