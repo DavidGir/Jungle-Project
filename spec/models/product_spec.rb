@@ -37,7 +37,11 @@ RSpec.describe Product, type: :model do
     end
 
     # Validation that a product with all valid fields saves successfully
-    
+    it 'saves successfully with all fields present' do
+      @category = Category.new 
+      @product = Product.new(name: "Valid Product", price: 100, quantity: 10, category: @category)
+      expect(@product.save).to be true
+    end
 
   end
 end
