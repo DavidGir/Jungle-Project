@@ -20,10 +20,17 @@ RSpec.describe Product, type: :model do
       expect(@product.save).to be false
       expect(@product.errors.full_messages).to include("Price cents can't be blank")
     end
+
     #Validation for quantity
+    it 'does not save without a quantity' do
+      @category = Category.new
+      @product = Product.new(name: "Test Product", price: 100, quantity: nil, category: @category)
+      expect(@product.save).to be false
+      expect(@product.errors.full_messages).to include("Quantity can't be blank")
+    end
 
     #Validation for category
-
+    
     # Validation that a product with all valid fields saves successfully
 
 
