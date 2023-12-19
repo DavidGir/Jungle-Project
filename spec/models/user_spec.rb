@@ -8,8 +8,8 @@ RSpec.describe User, type: :model do
         first_name: 'Jo',
         last_name: 'Doe',
         email: 'jo@example.com',
-        password: '123',
-        password_confirmation: '123'
+        password: 'password123',
+        password_confirmation: 'password123'
       )
       expect(user).to be_valid
 
@@ -34,15 +34,15 @@ RSpec.describe User, type: :model do
         first_name: 'Jane',
         last_name: 'Doe',
         email: 'test@example.com',
-        password: '123',
-        password_confirmation: '123'
+        password: 'password123',
+        password_confirmation: 'password123'
       )
       user_with_duplicate_email = User.new(
         first_name: 'Janet',
         last_name: 'Doe',
         email: 'TEST@example.com',
-        password: '123',
-        password_confirmation: '123'
+        password: 'password123',
+        password_confirmation: 'password123'
       )
       expect(user_with_duplicate_email).to_not be_valid
     end
@@ -53,12 +53,26 @@ RSpec.describe User, type: :model do
         email: nil,
         first_name: nil,
         last_name: nil,
-        password: '123',
-        password_confirmation: '123'
+        password: 'password123',
+        password_confirmation: 'password123'
       )
       expect(user).to_not be_valid
     end
 
+    # Test for minimum password length
+    it 'does not save with a password shorter than the minimum length' do
+      user = User.new(
+        first_name: 'Jo',
+        last_name: 'Doe',
+        email: 'jo@example.com',
+        password: '123', 
+        password_confirmation: '123'
+      )
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+    end
+
+    
   end
 
 end
