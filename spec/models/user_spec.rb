@@ -47,7 +47,17 @@ RSpec.describe User, type: :model do
       expect(user_with_duplicate_email).to_not be_valid
     end
 
-    
+    # Test for presence of email, first name, and last name
+    it 'validates presence of email, first name, and last name' do
+      user = User.new(
+        email: nil,
+        first_name: nil,
+        last_name: nil,
+        password: '123',
+        password_confirmation: '123'
+      )
+      expect(user).to_not be_valid
+    end
 
   end
 
