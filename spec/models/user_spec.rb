@@ -28,7 +28,27 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
+    # Test for email uniqueness
+    it 'validates uniqueness of email' do
+      User.create(
+        first_name: 'Jane',
+        last_name: 'Doe',
+        email: 'test@example.com',
+        password: '123',
+        password_confirmation: '123'
+      )
+      user_with_duplicate_email = User.new(
+        first_name: 'Janet',
+        last_name: 'Doe',
+        email: 'TEST@example.com',
+        password: '123',
+        password_confirmation: '123'
+      )
+      expect(user_with_duplicate_email).to_not be_valid
+    end
+
     
+
   end
 
 end
