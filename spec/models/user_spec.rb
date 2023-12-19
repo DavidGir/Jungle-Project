@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  
   describe 'Validations' do
      # Test for presence of password and password_confirmation and their match
      it 'validates presence of password and password_confirmation and their match' do
@@ -71,9 +72,47 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
       expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
-
-    
   end
 
+  # Tests for the custom authentication method in User model
+  describe '.authenticate_with_credentials' do
+    # Before each test, set up user in the database.
+    # This user is used to test the authentication method.
+    before(:each) do
+      @user = User.create!(
+        first_name: 'Jo',
+        last_name: 'Doe',
+        email: 'example@domain.com',
+        password: 'password123',
+        password_confirmation: 'password123'
+      )
+    end
+
+    # Test case to verify that a user can be authenticated with correct credentials.
+    it 'authenticates correctly with valid credentials' do
+      user = User.authenticate_with_credentials('example@domain.com', 'password123')
+      expect(user).to eq(@user)
+    end
+
+    # Test case to ensure that authentication fails with an incorrect password.
+    it 'does not authenticate with incorrect password' do
+      user = User.authenticate_with_credentials('example@domain.com', 'wrongpassword')
+      expect(user).to be_nil
+    end
+
+    # Test case to check that authentication still succeeds even if there are leading and/or trailing spaces in the email address.
+    it 'authenticates correctly with whitespace around email' do
+      user = User.authenticate_with_credentials('  example@domain.com  ', 'password123')
+      # Whitespace should be stripped, allowing successful authentication.
+      expect(user).to eq(@user)
+    end
+
+    # Test case to verify that email case sensitivity does not prevent authentication.
+    it 'authenticates correctly with case-insensitive email' do
+      user = User.authenticate_with_credentials('ExAmPlE@DoMaIn.CoM', 'password123')
+      # Email case differences should not affect authentication.
+      expect(user).to eq(@user)
+    end
+  end
 end
 
