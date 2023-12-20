@@ -3,6 +3,8 @@ DatabaseCleaner.strategy = :truncation
 
 return unless Rails.env.test?
 CypressRails.hooks.before_server_start do
+  
+  puts 'Seeding test database'
   # Called once, before either the transaction or the server is started
   cat1 = Category.find_or_create_by! name: 'Evergreens'
 
